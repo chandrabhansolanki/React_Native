@@ -7,15 +7,8 @@
 // import LoginSignup from "./Component/LoginSignup/LoginSignup"
 import Routes from './Routes/Routes'
 
-
-
-export default function App() {
- 
-
-  
+export default function App() {  
   return (
-  
         <Routes />
-   
   );
 }
