@@ -7,7 +7,7 @@ import LoginSignup from "../Component/LoginSignup/LoginSignup"
 import Signup from "../Component/Sign Up/SignUp"
 import ForgetPassword from "../Component/ForgetPassword/ForgetPassword"
 import EnterVerfication from "../Component/Enter Verfication/EnterVerfication"
-import Home from "../Component/Home/Home"
+import MainNavigation from "../Component/MainNavigation/MainNavigation"
 
 const Routes =() => {
     const Stack = createNativeStackNavigator()
@@ -20,7 +20,7 @@ const Routes =() => {
                 <Stack.Screen name="Signup" component={Signup} />
                 <Stack.Screen name="forgetpassword" component={ForgetPassword} />
                 <Stack.Screen name="enterVerfication" component={EnterVerfication} />
-                <Stack.Screen name="home" component={Home} />
+                <Stack.Screen name="navigations" component={MainNavigation} />
             </Stack.Navigator>
         </NavigationContainer>
     )

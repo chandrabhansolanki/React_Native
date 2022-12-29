@@ -1,4 +1,4 @@
-import React,{useState} from "react"
+import React, { useState } from "react"
 import { View, Text, ImageBackground, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput } from "react-native"
 import { LinearGradient } from 'expo-linear-gradient';
 import {
@@ -6,19 +6,19 @@ import {
     Cursor,
     useBlurOnFulfill,
     useClearByFocusCell,
-  } from 'react-native-confirmation-code-field';
+} from 'react-native-confirmation-code-field';
 
-  const CELL_COUNT = 6;
+const CELL_COUNT = 6;
 const EnterVerfication = ({ navigation }) => {
     const backgroundImage = require("../../assets/Vector.png")
     const loginLogos = require("../../assets/loginlogo.png")
     const arrow = require("../../assets/leftarrow.png")
 
     const [value, setValue] = useState('');
-    const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
+    const ref = useBlurOnFulfill({ value, cellCount: CELL_COUNT });
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-      value,
-      setValue,
+        value,
+        setValue,
     });
 
     return (
@@ -50,25 +50,25 @@ const EnterVerfication = ({ navigation }) => {
                     <TextInput style={styles.email} placeholderTextColor="white" placeholder="Enter your email" />
                 </View> */}
 
-<CodeField
-        ref={ref}
-        {...props}
-        // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
-        value={value}
-        onChangeText={setValue}
-        cellCount={CELL_COUNT}
-        rootStyle={styles.codeFieldRoot}
-        keyboardType="number-pad"
-        textContentType="oneTimeCode"
-        renderCell={({index, symbol, isFocused}) => (
-          <Text
-            key={index}
-            style={[styles.cell, isFocused && styles.focusCell]}
-            onLayout={getCellOnLayoutHandler(index)}>
-            {symbol || (isFocused ? <Cursor /> : null)}
-          </Text>
-        )}
-      />
+                <CodeField
+                    ref={ref}
+                    {...props}
+                    // Use `caretHidden={false}` when users can't paste a text value, because context menu doesn't appear
+                    value={value}
+                    onChangeText={setValue}
+                    cellCount={CELL_COUNT}
+                    rootStyle={styles.codeFieldRoot}
+                    keyboardType="number-pad"
+                    textContentType="oneTimeCode"
+                    renderCell={({ index, symbol, isFocused }) => (
+                        <Text
+                            key={index}
+                            style={[styles.cell, isFocused && styles.focusCell]}
+                            onLayout={getCellOnLayoutHandler(index)}>
+                            {symbol || (isFocused ? <Cursor /> : null)}
+                        </Text>
+                    )}
+                />
 
                 <View style={styles.resendContainer}>
                     <Text style={{ color: "white", textAlign: "center" }}>Didn’t received the code? </Text>
@@ -77,14 +77,14 @@ const EnterVerfication = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                <TouchableOpacity style={{ alignItems: "center",  }}  >
+                <TouchableOpacity style={{ alignItems: "center", }}  >
                     <View style={{ width: "100%" }} >
                         <LinearGradient colors={["#1B75D0", "#6AD0FF"]} start={[0.0, 0.0]} end={[1.0, 0.5]} locations={[0.0, 1.0]} style={styles.confirmOTP}>
                             <Text style={{ color: "white" }}>Confirm OTP</Text>
                         </LinearGradient>
                     </View>
                 </TouchableOpacity>
-
+            
 
             </View>
         </ImageBackground>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         color: "white",
         justifyContent: "center",
         alignItems: "center",
-        paddingVertical:30
+        paddingVertical: 30
     },
     confirmOTP: {
         height: 50,
@@ -130,21 +130,21 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    root: {flex: 1, padding: 20},
-    title: {textAlign: 'center', fontSize: 30},
-    codeFieldRoot: {marginTop: 20},
+    root: { flex: 1, padding: 20 },
+    title: { textAlign: 'center', fontSize: 30 },
+    codeFieldRoot: { marginTop: 20 },
     cell: {
-        width: Dimensions.get("window").width/8,
-        height: Dimensions.get("window").height/15,
+        width: Dimensions.get("window").width / 8,
+        height: Dimensions.get("window").height / 15,
         lineHeight: 50,
         fontSize: 18,
         borderWidth: 2,
-        borderRadius:6,
+        borderRadius: 6,
         borderColor: 'grey',
         textAlign: 'center',
         backgroundColor: "grey",
-        opacity:.3,
-        color:"white"
+        opacity: .3,
+        color: "white"
     },
     focusCell: {
         borderColor: 'grey',

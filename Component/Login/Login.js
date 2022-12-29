@@ -1,8 +1,12 @@
-import React from "react"
-import { View, Text, ImageBackground, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput, ScrollView } from "react-native"
+import React, { useState } from "react"
+import { View, StatusBar, Text, ImageBackground, StyleSheet, Image, Dimensions, TouchableOpacity, TextInput, ScrollView } from "react-native"
 import { LinearGradient } from 'expo-linear-gradient';
 // import { KeyboardAwareScrollView } from '@codler/react-native-keyboard-aware-scroll-view'
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+
+const STYLES = ['default', 'dark-content', 'light-content'];
+const TRANSITIONS = ['fade', 'slide', 'none'];
 
 const Login = ({ navigation }) => {
     const backgroundImage = require("../../assets/Vector.png")
@@ -14,8 +18,20 @@ const Login = ({ navigation }) => {
     const right = require("../../assets/right.png")
     const apple = require("../../assets/apple.png")
     const google = require("../../assets/Google.png")
+
+
+    const [hidden, setHidden] = useState(false);
+    const [statusBarStyle, setStatusBarStyle] = useState(STYLES[0]);
+    const [statusBarTransition, setStatusBarTransition] = useState(TRANSITIONS[0]);
     return (
         <ImageBackground style={styles.container} source={backgroundImage} >
+            {/* <StatusBar
+        animated={true}
+        backgroundColor="#060D1D"
+        barStyle={statusBarStyle}
+        showHideTransition={statusBarTransition}
+        hidden={hidden} /> */}
+
             <ScrollView>
                 <View style={styles.loginLogo}>
                     <Image source={loginLogos} style={styles.logoStyle} />
@@ -46,7 +62,7 @@ const Login = ({ navigation }) => {
                             <Text style={{ color: "white", }}>Forgot Password ?</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={{ alignItems: "center", marginTop: 30 }} onPress={() => navigation.navigate('home')} >
+                    <TouchableOpacity style={{ alignItems: "center", marginTop: 30 }} onPress={() => navigation.navigate('navigations')} >
                         <View style={{ width: "100%" }} >
                             <LinearGradient colors={["#1B75D0", "#6AD0FF"]} start={[0.0, 0.0]} end={[1.0, 0.5]} locations={[0.0, 1.0]} style={styles.loginButton}>
                                 <Text style={{ color: "white" }}>Login</Text>
