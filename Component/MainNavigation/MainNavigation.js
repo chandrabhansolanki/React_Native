@@ -12,7 +12,7 @@ const MainNavigation = () => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: "#0c1826" } }}>
+        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: "#0c1826",height:"7.3%",paddingBottom:5 } }}>
             <Tab.Screen options={{
                 tabBarIcon: ({ focused }) => (
                     <Image source={focused ? homeActive : home} style={{height:22,width:22}} />

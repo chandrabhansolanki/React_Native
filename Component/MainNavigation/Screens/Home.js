@@ -1,22 +1,42 @@
 import React, { useState } from "react"
 import { Text, View, StyleSheet, StatusBar, Image, Dimensions, ScrollView, FlatList, TouchableOpacity } from "react-native"
-import { bell, homeLogo, homebackground, menu, speaker, graph1, graph2, graph3, account, more, security, free, referal, notification } from "../../../Images/Images";
+import { bell, homeLogo, homebackground, menu, speaker, BitcoinGraph, BitcoinImage,  BitcoinDownArrow, BitcoinDownGraph,BitcoinUpArrow, account, more, security, free, referal, notification } from "../../../Images/Images";
 import Swiper from 'react-native-swiper'
 
 
 const STYLES = ['default', 'dark-content', 'light-content'];
 const TRANSITIONS = ['fade', 'slide', 'none'];
 const data = [
-        {
-        image: graph3
+    {
+        bitcoinName: "Bitcoin BTC",
+        bitcoinINR: "INR 853,134,900",
+        bitcoinImage: BitcoinImage,
+        bitcoinGraph: BitcoinGraph,
+        bitcoinArrow: BitcoinUpArrow,
+        bitcoinPercent: 12.5
     },
     {
-        image: graph2
-    },
-    {
-
-        image: graph1
-    },
+        bitcoinName: "Bitcoin BTC",
+        bitcoinINR: "INR 853,134,900",
+        bitcoinImage: BitcoinImage,
+        bitcoinGraph: BitcoinDownGraph,
+        bitcoinArrow: BitcoinDownArrow,
+        bitcoinPercent: -4.6
+    }, {
+        bitcoinName: "Bitcoin BTC",
+        bitcoinINR: "INR 853,134,900",
+        bitcoinImage: BitcoinImage,
+        bitcoinGraph: BitcoinDownGraph,
+        bitcoinArrow: BitcoinDownArrow,
+        bitcoinPercent: -8.9
+    }, {
+        bitcoinName: "Bitcoin BTC",
+        bitcoinINR: "INR 853,134,900",
+        bitcoinImage: BitcoinImage,
+        bitcoinGraph: BitcoinGraph,
+        bitcoinArrow: BitcoinUpArrow,
+        bitcoinPercent: 4.5
+    }
 ]
 
 const Home = () => {
@@ -26,7 +46,29 @@ const Home = () => {
 
 
     const renderItem = ({ item }) => {
-        return <Image style={{ width: 157, borderRadius: 5, height: 79, resizeMode: "contain",  borderWidth: 10, borderWidthColor: "red" }} source={item.image} />
+        console.log(item);
+        return (
+            <View style={{ borderRightWidth: 5, borderColor: "#0c1826",borderRadius:5 }}>
+                <View style={{ height: 79, width: 157, paddingHorizontal: 10, paddingVertical: 8 }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                        <Image style={{ width: 19, height: 19, resizeMode: "contain" }} source={item?.bitcoinImage} />
+                        <Image style={{ width: 47, height: 21, resizeMode: "contain" }} source={item?.bitcoinPercent < 0 ? item?.bitcoinGraph:item?.bitcoinGraph} />
+                    </View>
+                    <View style={{ flexDirection: "row", justifyContent: "space-between", paddingTop: 11, alignItems: "center" }}>
+                        <View>
+                            <Text style={{ color: "white", fontSize: 10, fontWeight: '600', fontStyle: "normal" }}>{item?.bitcoinName}</Text>
+                        </View>
+                        <View style={{flexDirection:"row",alignItems:"center" ,justifyContent:"space-between",width:30, height:17}}>
+                            <Image style={{ width: 6, height: 4 }} source={item?.bitcoinPercent < 0 ? item?.bitcoinArrow : item?.bitcoinArrow} />
+                            <Text style={item?.bitcoinPercent < 0 ? styles.downArrow : styles.upArrow}>{item?.bitcoinPercent}%</Text>
+                        </View>
+                    </View>
+                    <View style={{ width: 94, height: 18 }}>
+                        <Text style={{ color: "#fff", fontSize: 12, fontWeight: "400", lineHeight: 18, fontStyle: "normal" }}>{item.bitcoinINR}</Text>
+                    </View>
+                </View>
+            </View>
+        )
     }
 
     return (
@@ -43,7 +85,7 @@ const Home = () => {
                         <Image source={homeLogo} />
                         <Image source={bell} style={{ height: 23.66, width: 23.84 }} />
                     </View>
-                    <Swiper style={styles.wrapper} showsButtons={false} dotColor="#55596A">
+                    <Swiper style={styles.wrapper} showsButtons={false} dotColor="#55596A" autoplay="true">
                         <View >
                             <Image source={homebackground} style={{ height: 160, width: 320, resizeMode: "contain" }} />
                         </View>
@@ -57,13 +99,13 @@ const Home = () => {
                             <Image source={homebackground} style={{ height: 160, width: 320, resizeMode: "contain" }} />
                         </View>
                     </Swiper>
-                    <View style={[styles.logocontainer , {paddingBottom:15}]}>
+                    <View style={[styles.logocontainer, { paddingBottom: 15 }]}>
                         <Image source={speaker} />
                         <Text style={{ color: "white", fontSize: 10, fontWeight: "300" }}>NKN Staking special : Enjoy up to 50% reward rate and sha </Text>
                         <Image source={menu} />
                     </View>
                 </View>
-                <View style={{borderWidth: 5, borderColor: "#0c1826"}}>
+                <View style={{ borderTopWidth: 5, borderBottomWidth: 5, borderColor: "#0c1826" }}>
                     <FlatList
                         horizontal
                         data={data}
@@ -71,7 +113,7 @@ const Home = () => {
                         showsHorizontalScrollIndicator={false} />
                 </View>
                 <View>
-                    <View style={{ flexDirection: "row", justifyContent: "space-around",  paddingVertical: 20 }}>
+                    <View style={{ flexDirection: "row", justifyContent: "space-around", paddingVertical: 20 }}>
                         <TouchableOpacity>
                             <Image source={account} />
                         </TouchableOpacity>
@@ -94,15 +136,13 @@ const Home = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={{ marginHorizontal: 28,}}>
+                <View style={{ marginHorizontal: 28, }}>
                     <View style={{ flexDirection: "row", }}>
-                        <TouchableOpacity><Text style={{ color: "white",  paddingVertical: 18 }}>Spot</Text></TouchableOpacity>
-                        <TouchableOpacity><Text style={{ color: "white", paddingVertical: 18, paddingHorizontal:20 }}>Gainers</Text></TouchableOpacity>
-                        <TouchableOpacity><Text style={{ color: "white",  paddingVertical: 18 }}>New Listed</Text></TouchableOpacity>
+                        <TouchableOpacity><Text style={{ color: "white", paddingVertical: 18 }}>Spot</Text></TouchableOpacity>
+                        <TouchableOpacity><Text style={{ color: "white", paddingVertical: 18, paddingHorizontal: 20 }}>Gainers</Text></TouchableOpacity>
+                        <TouchableOpacity><Text style={{ color: "white", paddingVertical: 18 }}>New Listed</Text></TouchableOpacity>
                     </View>
                 </View>
-
-
             </ScrollView>
         </View>
     )
@@ -141,6 +181,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#92BBD9'
     },
+    downArrow: {
+        color: "#ED4E4E",
+        fontSize: 7,
+        fontWeight: '600',
+        lineHeight: 10,
+        fontStyle: "normal"
+    },
+    upArrow: {
+        color: "#4ED56C",
+        fontSize: 7,
+        fontWeight: '600',
+        lineHeight: 10,
+        fontStyle: "normal"
+
+    }
 
 })
 
