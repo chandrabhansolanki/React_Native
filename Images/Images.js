@@ -28,4 +28,4 @@ export const BitcoinDownGraph = require("../assets/bitcoinDownGraph.png")
 export const BitcoinPercent = require("../assets/bitcoinpercent.png")
 export const BitcoinUpArrow = require("../assets/upArrow.png")
 export const BitcoinDownArrow = require("../assets/downArrow.png")
-
+export const SearchIcon = require('../assets/searchIcon.png')

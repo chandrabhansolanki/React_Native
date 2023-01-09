@@ -1,7 +1,7 @@
 import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { accounts, accountActive, home, homeActive, market, marketActive, trader, traderActive, wallet, walletActive } from "../../Images/Images"
-import { Image } from "react-native"
+import { Image, Dimensions } from "react-native"
 import Home from "./Screens/Home"
 import Market from "./Screens/Market"
 import Trade from "./Screens/Trade"
@@ -12,7 +12,7 @@ const MainNavigation = () => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: "#0c1826",height:"7.3%",paddingBottom:5 } }}>
+        <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false, tabBarStyle: { backgroundColor: "#0c1826",height:Dimensions.get("window").height / 16,paddingBottom:5 } }}>
             <Tab.Screen options={{
                 tabBarIcon: ({ focused }) => (
                     <Image source={focused ? homeActive : home} style={{height:22,width:22}} />
