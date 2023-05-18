@@ -1,6 +1,6 @@
-import React, { useState } from "react"
-import { View, Text, StatusBar, StyleSheet, ScrollView, TextInput, Image, Dimensions, FlatList } from "react-native"
-
+import React, { useState, useEffect } from "react"
+import { View, Text, StatusBar, TouchableOpacity, StyleSheet, ScrollView, TextInput, Image, Dimensions, FlatList } from "react-native"
+import { LinearGradient } from 'expo-linear-gradient';
 import { SearchIcon, BitcoinImage, BitcoinGraph, BitcoinDownGraph, BitcoinUpArrow, BitcoinDownArrow } from '../../../Images/Images'
 
 
@@ -37,13 +37,201 @@ const data = [
     }
 ]
 
+const data2 = [
+    {
+        id: 1,
+        text: "Favourites",
+        currency: [
+            {
+                id: 0,
+                currencyName: "BTC",
+                extendData: [
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 0,
+                    },
+                    {
+                        symbol: "KLV/BTC",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 1,
+                    },
+                    {
+                        symbol: "KLV/TRX",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 2,
+                    },
+                    {
+                        symbol: "KLV/USDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 3,
+                    },
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 4,
+                    },
+                ],
+            },
+            { id: 1, currencyName: "BNB" },
+            { id: 2, currencyName: "ETH" },
+            { id: 3, currencyName: "TRX" },
+        ],
+    },
+    {
+        id: 2,
+        text: "Spot",
+        currency: [
+            {
+                id: 0,
+                currencyName: "BTC",
+                extendData: [
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 0,
+                    },
+                    {
+                        symbol: "KLV/BTC",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 1,
+                    },
+                    {
+                        symbol: "KLV/TRX",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 2,
+                    },
+                    {
+                        symbol: "KLV/USDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 3,
+                    },
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 4,
+                    },
+                ],
+            },
+            { id: 1, currencyName: "BNB" },
+            { id: 2, currencyName: "ETH" },
+            { id: 3, currencyName: "TRX" },
+        ],
+    },
+    {
+        id: 3,
+        text: "New Listed",
+        currency: [
+            {
+                id: 0,
+                currencyName: "BTC",
+                extendData: [
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 0,
+                    },
+                    {
+                        symbol: "KLV/BTC",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 1,
+                    },
+                    {
+                        symbol: "KLV/TRX",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 2,
+                    },
+                    {
+                        symbol: "KLV/USDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 3,
+                    },
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 4,
+                    },
+                ],
+            },
+            { id: 1, currencyName: "BNB" },
+            { id: 2, currencyName: "ETH" },
+            { id: 3, currencyName: "TRX" },
+        ],
+    },
+    {
+        id: 4,
+        text: "Top Gainers",
+        currency: [
+            {
+                id: 0,
+                currencyName: "BTC",
+                extendData: [
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 0,
+                    },
+                    {
+                        symbol: "KLV/BTC",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 1,
+                    },
+                    {
+                        symbol: "KLV/TRX",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 2,
+                    },
+                    {
+                        symbol: "KLV/USDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 3,
+                    },
+                    {
+                        symbol: "KLV/SDT",
+                        lastPrice: "0.057608",
+                        Change: "10.2%",
+                        id: 4,
+                    },
+                ],
+            },
+            { id: 1, currencyName: "BNB" },
+            { id: 2, currencyName: "ETH" },
+            { id: 3, currencyName: "TRX" },
+        ],
+    },
+];
+
 
 const Market = () => {
+    const [tabData, setTabData] = useState(data2)
+    const [activeTab, setActiveTab] = useState(1)
+    const [currencyActiveTab, setCurrencyActiveTab] = useState(0)
+    const [currencyData, setCurrencyData] = useState()
+    const [currencyExtendedData, setCurrencyExtendedData] = useState()
+ 
 
     const renderItem = ({ item }) => {
-        console.log(item);
         return (
-            <View style={{ borderRadius: 5, backgroundColor: "black", marginRight: 5, marginBottom:5 }}>
+            <View style={{ borderRadius: 5, backgroundColor: "black", marginRight: 5, marginBottom: 5 }}>
                 <View style={{ height: 79, width: 157, paddingHorizontal: 10, paddingVertical: 8 }}>
                     <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
                         <Image style={{ width: 19, height: 19, resizeMode: "contain" }} source={item?.bitcoinImage} />
@@ -66,6 +254,30 @@ const Market = () => {
         )
     }
 
+    const tabDataHandler = (id) => {
+        setActiveTab(id)
+        setCurrencyActiveTab(0)
+    }
+
+    useEffect(() => {
+
+        let activeTabData = tabData?.filter((item) => {
+            if (item.id === activeTab) {
+                setCurrencyData(item.currency)
+                item?.currency?.filter((val) => {
+                    if (val.id === currencyActiveTab) {
+                        setCurrencyExtendedData(val?.extendData)
+                    }
+                })
+            }
+        })
+
+    }, [activeTab])
+
+    const currencyActiveTabHandler = (id, extendData) => {
+        setCurrencyExtendedData(extendData)
+        setCurrencyActiveTab(id)
+    }
 
     return (
         <View style={styles.mainContainer}>
@@ -78,16 +290,43 @@ const Market = () => {
                     <View style={styles.TrendingContainer}>
                         <Text style={{ color: "#FFFFFF", fontSize: 16 }}>Trending</Text>
                     </View>
-                    <View style={{paddingLeft:28 }}>
+                    <View style={{ paddingLeft: 28 }}>
                         <FlatList
                             horizontal
                             data={data}
                             renderItem={renderItem}
                             showsHorizontalScrollIndicator={false} />
                     </View>
-
                 </View>
-
+                <View style={{ marginHorizontal: 28, }}>
+                    <View style={{ flexDirection: "row", }}>
+                        {tabData.map((item) => {
+                            return (<TouchableOpacity key={item.id} onPress={() => tabDataHandler(item?.id)}><Text style={item.id === activeTab ? styles.activeTab : styles.unActiveTab}>{item?.text}</Text>
+                            </TouchableOpacity>)
+                        }
+                        )}
+                    </View>
+                    <View style={{ flexDirection: "row" }}>
+                        {currencyData?.map((item) => {
+                            return (
+                                <TouchableOpacity key={item.id} onPress={() => currencyActiveTabHandler(item.id, item?.extendData)}>
+                                    <Text style={item.id === currencyActiveTab ? styles.currencyActiveTab : styles.currencyUnActiveTab}>{item?.currencyName}</Text>
+                                </TouchableOpacity>
+                            )
+                        })}
+                    </View>
+                    <View style={{ marginTop: 16 }}>
+                        {currencyExtendedData?.map((item) => {
+                            return (
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingVertical: 16 }}>
+                                    <Text style={{ color: "white" }}>{item?.symbol}</Text>
+                                    <Text style={{ color: "white" }}>{item?.lastPrice}</Text>
+                                    <Text style={{ color: "white" }}>{item?.Change}</Text>
+                                </View>
+                            )
+                        })}
+                    </View>
+                </View>
             </ScrollView>
         </View>
     )
@@ -101,7 +340,7 @@ const styles = StyleSheet.create({
     },
     container: {
         paddingTop: 25,
-      
+
         backgroundColor: "#0c1826"
     },
     search: {
@@ -131,8 +370,43 @@ const styles = StyleSheet.create({
     TrendingContainer: {
         paddingHorizontal: 28,
         marginVertical: 12,
-       
+
     },
+    downArrow: {
+        color: "#ED4E4E",
+        fontSize: 7,
+        fontWeight: '600',
+        lineHeight: 10,
+        fontStyle: "normal"
+    },
+    upArrow: {
+        color: "#4ED56C",
+        fontSize: 7,
+        fontWeight: '600',
+        lineHeight: 10,
+        fontStyle: "normal"
+
+    },
+    activeTab: {
+        color: "green",
+        paddingRight: 20,
+        paddingVertical: 18
+    },
+    unActiveTab: {
+        color: 'white',
+        paddingRight: 20,
+        paddingVertical: 18
+    },
+    currencyActiveTab: {
+        color: 'green',
+        paddingRight: 20,
+        // paddingVertical: 18
+    },
+    currencyUnActiveTab: {
+        color: 'white',
+        paddingRight: 20,
+    }
+
 
 })
 
